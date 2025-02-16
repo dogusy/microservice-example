@@ -30,6 +30,7 @@ public class Book {
   @Column(name = "author", nullable = false)
   private String author;
   @Column(name = "status", nullable = false)
+  @Enumerated(EnumType.STRING)
   private BookStatus status;
   @Column(name = "created_at", nullable = false)
   private OffsetDateTime createdAt;

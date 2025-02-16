@@ -1,15 +1,31 @@
 services:
-  postgresql:
-    container_name: postgresql
-    image: postgres
+  book-db:
+    container_name: book-db
+    image: postgres:16
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: books
       PGDATA: /data/postgres
     volumes:
       - postgres:/data/postgres
     ports:
-      - "5432:5432"
+      - "5433:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+  user-db:
+    container_name: user-db
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: users
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5434:5432"
     networks:
       - postgres
     restart: unless-stopped
