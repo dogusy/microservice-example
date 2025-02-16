@@ -13,4 +13,5 @@ public class AddBookRequest {
 
   private String author;
   private String bookName;
+  private String userID;
 }

@@ -31,10 +31,7 @@ public class BookController {
 
   @PostMapping
   public ResponseEntity<AddBookResponse> addNewBook(@RequestBody AddBookRequest addBookRequest) {
-    var response = bookService.addBook(addBookRequest);
-    return response.isSuccess()
-        ? ResponseEntity.status(HttpStatus.CREATED).body(response)
-        : ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    return ResponseEntity.status(HttpStatus.CREATED).body(bookService.addBook(addBookRequest));
   }
 
   @DeleteMapping("/{id}")

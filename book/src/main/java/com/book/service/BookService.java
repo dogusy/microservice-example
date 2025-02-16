@@ -32,15 +32,13 @@ public class BookService {
 
       var savedBook = bookRepository.save(book);
 
-      var addBookResponse = AddBookResponse.builder().
-              bookName(savedBook.getName()).
-              author(savedBook.getAuthor()).
-              msg("Save Success").
-              success(true).build();
-
-      return addBookResponse;
+        return AddBookResponse.builder().
+                bookName(savedBook.getName()).
+                author(savedBook.getAuthor()).
+                msg("Save Success").
+                success(true).build();
     }catch (Exception e){
-      //TODO build global exceiption handler and define exceptions if necc.
+      //TODO build global exception handler and define exceptions if necc.
       throw new RuntimeException();
     }
   }
