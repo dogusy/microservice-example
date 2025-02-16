@@ -4,7 +4,6 @@ import com.book.dto.request.AddBookRequest;
 import com.book.dto.response.AddBookResponse;
 import com.book.model.Book;
 import com.book.service.BookService;
-import com.thoughtworks.xstream.converters.basic.UUIDConverter;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;

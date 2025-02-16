@@ -23,25 +23,33 @@ public class BookService {
   }
 
   public AddBookResponse addBook(AddBookRequest addBookRequest) {
-    var book = Book.builder().
-        author(addBookRequest.getAuthor()).
-        name(addBookRequest.getBookName()).
-        createdAt(OffsetDateTime.now()).
-        status(BookStatus.NEW).build();
-    var addBookResponse = AddBookResponse.builder().
-        bookName(addBookRequest.getBookName()).
-        author(addBookRequest.getAuthor()).
-        msg("");
-        if (bookRepository.save(book).getId()!= null){
-          addBookResponse.success(true);
-        }else {
-          addBookResponse.success(false);
-        }
-        return addBookResponse.build();
+    try {
+      var book = Book.builder().
+              author(addBookRequest.getAuthor()).
+              name(addBookRequest.getBookName()).
+              createdAt(OffsetDateTime.now()).
+              status(BookStatus.NEW).build();
 
+      var savedBook = bookRepository.save(book);
+
+      var addBookResponse = AddBookResponse.builder().
+              bookName(savedBook.getName()).
+              author(savedBook.getAuthor()).
+              msg("Save Success").
+              success(true).build();
+
+      return addBookResponse;
+    }catch (Exception e){
+      //TODO build global exceiption handler and define exceptions if necc.
+      throw new RuntimeException();
+    }
   }
 
   public void removeBookById(UUID bookId) {
-    bookRepository.deleteById(bookId);
+    try {
+      bookRepository.deleteById(bookId);
+    }catch (Exception e){
+      throw new RuntimeException();
+    }
   }
 }
